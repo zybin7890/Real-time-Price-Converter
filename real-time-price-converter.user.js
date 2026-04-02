@@ -2,63 +2,48 @@
 // @name         Real-time Price Converter
 // @name:zh-CN   实时价格汇率换算器
 // @name:en      Real-time Price Converter
-// @namespace    https://github.com/zybin/real-time-price-converter
-// @version      4.0.0
-// @description  实时识别购物网站价格并换算为目标货币，支持多站点、多货币、中文/English 切换。
-// @description:zh-CN  实时识别购物网站价格并换算为目标货币，支持多站点、多货币、中文/English 切换。
-// @description:en  Detect prices on shopping websites and convert them to your preferred currency in real time, with multi-site support and bilingual UI.
+// @namespace    https://greasyfork.org/scripts/572072
+// @version      4.1.0
+// @description  Detect prices on shopping websites and show converted values in real time.
+// @description:zh-CN 在购物网站上识别价格，并实时显示目标货币换算结果。
+// @description:en Detect prices on shopping websites and show converted values in real time.
 // @author       zybin
 // @license      GPL-3.0-only
-// @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxZDRlZDgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGY3NjZlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJ0YWciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYmVhZmUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQiIHk9IjQiIHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIgcng9IjE2IiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxwYXRoIGQ9Ik0yMCAxOGgxOGwxMCAxMC0xOCAxOC0xNi0xNlYyNGE2IDYgMCAwIDEgNi02eiIgZmlsbD0idXJsKCN0YWcpIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMy4yIiBmaWxsPSIjMWQ0ZWQ4Ii8+CiAgPHBhdGggZD0iTTQ1IDE3YTE1IDE1IDAgMCAxIDIgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg2ZWZhYyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDggMzlsLTUgNCAxLTciIGZpbGw9IiM4NmVmYWMiLz4KICA8cGF0aCBkPSJNMTkgNDdhMTUgMTUgMCAwIDEtMi0yNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYTVmM2ZjIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNiAyNWw1LTQtMSA3IiBmaWxsPSIjYTVmM2ZjIi8+CiAgPHRleHQgeD0iMzEiIHk9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwZjE3MmEiPiTCpTwvdGV4dD4KPC9zdmc+
-// @icon64       data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxZDRlZDgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGY3NjZlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJ0YWciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYmVhZmUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQiIHk9IjQiIHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIgcng9IjE2IiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxwYXRoIGQ9Ik0yMCAxOGgxOGwxMCAxMC0xOCAxOC0xNi0xNlYyNGE2IDYgMCAwIDEgNi02eiIgZmlsbD0idXJsKCN0YWcpIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMy4yIiBmaWxsPSIjMWQ0ZWQ4Ii8+CiAgPHBhdGggZD0iTTQ1IDE3YTE1IDE1IDAgMCAxIDIgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg2ZWZhYyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDggMzlsLTUgNCAxLTciIGZpbGw9IiM4NmVmYWMiLz4KICA8cGF0aCBkPSJNMTkgNDdhMTUgMTUgMCAwIDEtMi0yNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYTVmM2ZjIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNiAyNWw1LTQtMSA3IiBmaWxsPSIjYTVmM2ZjIi8+CiAgPHRleHQgeD0iMzEiIHk9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwZjE3MmEiPiTCpTwvdGV4dD4KPC9zdmc+
 // @match        *://*/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
 // @grant        GM_xmlhttpRequest
-// @connect      api.exchangerate-api.com
-// @run-at       document-end
+// @connect      open.er-api.com
+// @downloadURL  https://update.greasyfork.org/scripts/572072/Real-time%20Price%20Converter.user.js
+// @updateURL    https://update.greasyfork.org/scripts/572072/Real-time%20Price%20Converter.meta.js
 // ==/UserScript==
 
 (function ()
 {
     'use strict';
 
-    const MARK_PROCESSED_ATTR = 'data-zybin-processed';
-    const MARK_OWNED_ATTR     = 'data-zybin-owned';
-    const ZERO_WIDTH_SPACE    = '\u200B';
-    const DEFAULT_CACHE_MS    = 60 * 60 * 1000;
-    const MIN_CACHE_MS        = 60 * 1000;
+    // ================= 1. Config =================
+    const DEFAULT_CACHE_MS = 24 * 60 * 60 * 1000;
 
     const config =
     {
         targetCurrency: GM_getValue('targetCurrency', 'CNY'),
-        textColor:      GM_getValue('textColor', 'green'),
-        cacheTime:      clampCacheTime(GM_getValue('cacheTimeMs', DEFAULT_CACHE_MS)),
+        textColor:      GM_getValue('textColor', '#3fb950'),
+        cacheTime:      GM_getValue('cacheTimeMs', DEFAULT_CACHE_MS),
         debug:          GM_getValue('debug', false),
         language:       GM_getValue('language', 'auto')
     };
 
     let exchangeRates = {};
-    let mutationTimer = 0;
+    let siteRules     = [];
 
-    function clampCacheTime(value)
-    {
-        const num = Number(value);
-
-        if (!Number.isFinite(num) || num < MIN_CACHE_MS)
-        {
-            return DEFAULT_CACHE_MS;
-        }
-
-        return Math.round(num);
-    }
-
+    // ================= 2. I18N =================
     function detectBrowserLanguage()
     {
-        const language = String(navigator.language || navigator.userLanguage || '').toLowerCase();
+        const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
 
-        if (language.startsWith('zh'))
+        if (lang.startsWith('zh'))
         {
             return 'zh-CN';
         }
@@ -73,280 +58,122 @@
             return detectBrowserLanguage();
         }
 
-        if (config.language === 'zh-CN')
-        {
-            return 'zh-CN';
-        }
-
-        return 'en';
+        return config.language;
     }
 
     const i18n =
     {
         'zh-CN':
         {
-            menu_set_currency:      '⚙️ 设置目标货币（当前：{currency}）',
-            menu_set_color:         '🎨 设置价格颜色（当前：{color}）',
-            menu_set_cache:         '⏱️ 设置更新时间间隔（当前：{interval}）',
-            menu_set_language:      '🌐 设置界面语言（当前：{language}）',
-            menu_toggle_debug:      '🪵 调试日志（当前：{state}）',
+            language_option_auto: '跟随浏览器',
+            language_option_zh:   '简体中文',
+            language_option_en:   'English',
 
-            prompt_currency:        '请输入 3 位目标货币代码，例如：CNY、USD、JPY、TWD、EUR',
-            prompt_color:           '请输入 CSS 颜色值，例如：green、red、#00ff00',
-            prompt_cache:           '请输入汇率更新时间间隔，例如：10、30m、2h、1d',
-            prompt_language:        '请输入界面语言：\n\nauto = 跟随浏览器\nzh = 简体中文\nen = English',
+            debug_on:             '开',
+            debug_off:            '关',
+
+            menu_set_currency:    '⚙️ 设置目标货币 (当前: {currency})',
+            menu_set_color:       '🎨 设置价格颜色 (当前: {color})',
+            menu_set_cache:       '⏱️ 设置更新时间间隔 (当前: {interval})',
+            menu_set_language:    '🌐 设置界面语言 (当前: {language})',
+            menu_toggle_debug:    '🪵 调试日志 (当前: {state})',
+
+            prompt_currency:      '请输入 3 位目标货币代码，例如: CNY, USD, JPY, TWD, EUR',
+            prompt_color:         '请输入 CSS 颜色值，例如: #3fb950, green, #00ff00',
+            prompt_cache:         '请输入汇率更新时间间隔，支持以下格式:\n\n10   = 10 分钟\n30m  = 30 分钟\n2h   = 2 小时\n1d   = 1 天',
+            prompt_language:      '请输入界面语言:\n\nauto = 跟随浏览器\nzh   = 简体中文\nen   = English',
 
             alert_invalid_currency: '请输入有效的 3 位货币代码。',
-            alert_invalid_cache:    '输入无效，请输入例如 10、30m、2h 或 1d。',
+            alert_invalid_cache:    '请输入有效的时间间隔，例如 10、30m、2h、1d。',
             alert_invalid_language: '请输入 auto、zh 或 en。',
-            alert_cache_saved:      '已设置汇率更新时间间隔为 {interval}，刷新页面后生效。',
+            alert_cache_saved:      '已设置更新时间间隔为 {interval}，刷新页面后生效。',
             alert_language_saved:   '已设置界面语言为 {language}，刷新页面后生效。',
 
-            debug_on:               '开',
-            debug_off:              '关',
-            language_auto:          '跟随浏览器',
-            language_zh:            '简体中文',
-            language_en:            'English',
-            duration_minutes:       '{value} 分钟',
-            duration_hours:         '{value} 小时',
-            duration_days:          '{value} 天',
-            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}'
+            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
+            attribution_text:       '汇率来源',
+            approx_prefix:          '≈ '
         },
 
-        en:
+        'en':
         {
-            menu_set_currency:      '⚙️ Set target currency (Current: {currency})',
-            menu_set_color:         '🎨 Set text color (Current: {color})',
-            menu_set_cache:         '⏱️ Set refresh interval (Current: {interval})',
-            menu_set_language:      '🌐 Set interface language (Current: {language})',
-            menu_toggle_debug:      '🪵 Debug mode (Current: {state})',
+            language_option_auto: 'Follow browser',
+            language_option_zh:   'Simplified Chinese',
+            language_option_en:   'English',
 
-            prompt_currency:        'Enter a 3-letter target currency code, for example: CNY, USD, JPY, TWD, EUR',
-            prompt_color:           'Enter a CSS color value, for example: green, red, #00ff00',
-            prompt_cache:           'Enter the exchange-rate refresh interval, for example: 10, 30m, 2h, 1d',
-            prompt_language:        'Enter interface language:\n\nauto = Follow browser\nzh = Simplified Chinese\nen = English',
+            debug_on:             'On',
+            debug_off:            'Off',
+
+            menu_set_currency:    '⚙️ Set target currency (Current: {currency})',
+            menu_set_color:       '🎨 Set text color (Current: {color})',
+            menu_set_cache:       '⏱️ Set refresh interval (Current: {interval})',
+            menu_set_language:    '🌐 Set interface language (Current: {language})',
+            menu_toggle_debug:    '🪵 Debug mode (Current: {state})',
+
+            prompt_currency:      'Enter a 3-letter target currency code, for example: CNY, USD, JPY, TWD, EUR',
+            prompt_color:         'Enter a CSS color value, for example: #3fb950, green, #00ff00',
+            prompt_cache:         'Enter the exchange-rate refresh interval. Supported formats:\n\n10   = 10 minutes\n30m  = 30 minutes\n2h   = 2 hours\n1d   = 1 day',
+            prompt_language:      'Enter interface language:\n\nauto = Follow browser\nzh   = Simplified Chinese\nen   = English',
 
             alert_invalid_currency: 'Please enter a valid 3-letter currency code.',
-            alert_invalid_cache:    'Invalid input. Please enter something like 10, 30m, 2h, or 1d.',
+            alert_invalid_cache:    'Please enter a valid interval, such as 10, 30m, 2h, or 1d.',
             alert_invalid_language: 'Please enter auto, zh, or en.',
             alert_cache_saved:      'Refresh interval has been set to {interval}. Reload the page to apply it.',
             alert_language_saved:   'Interface language has been set to {language}. Reload the page to apply it.',
 
-            debug_on:               'On',
-            debug_off:              'Off',
-            language_auto:          'Follow browser',
-            language_zh:            'Simplified Chinese',
-            language_en:            'English',
-            duration_minutes:       '{value} minute(s)',
-            duration_hours:         '{value} hour(s)',
-            duration_days:          '{value} day(s)',
-            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}'
+            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
+            attribution_text:       'Rates by',
+            approx_prefix:          '≈ '
         }
     };
 
-    function formatTemplate(template, variables = {})
+    function formatTemplate(template, vars = {})
     {
-        return String(template).replace(/\{(\w+)\}/g, function (_, key)
+        return String(template).replace(/\{(\w+)\}/g, (_, key) =>
         {
-            if (Object.prototype.hasOwnProperty.call(variables, key))
-            {
-                return String(variables[key]);
-            }
-
-            return '';
+            return Object.prototype.hasOwnProperty.call(vars, key) ? String(vars[key]) : '';
         });
     }
 
-    function t(key, variables = {})
+    function t(key, vars = {})
     {
-        const current = getCurrentLanguage();
-        const table = i18n[current] || i18n.en;
-        const template = table[key] || i18n.en[key] || key;
-        return formatTemplate(template, variables);
+        const lang     = getCurrentLanguage();
+        const table    = i18n[lang] || i18n.en;
+        const fallback = i18n.en;
+        const template = table[key] || fallback[key] || key;
+        return formatTemplate(template, vars);
     }
 
-    function getLanguageDisplayName(language)
+    function getLanguageDisplayName(value)
     {
-        if (language === 'auto')
+        if (value === 'auto')
         {
-            return t('language_auto');
+            return t('language_option_auto');
         }
 
-        if (language === 'zh-CN')
+        if (value === 'zh-CN')
         {
-            return t('language_zh');
+            return t('language_option_zh');
         }
 
-        return t('language_en');
+        return t('language_option_en');
     }
 
+    // ================= 3. Helpers =================
     function log(...args)
     {
         if (config.debug)
         {
-            console.log('[zybin-price-converter]', ...args);
+            console.log('[price-converter]', ...args);
         }
-    }
-
-    function getHost()
-    {
-        return location.hostname.toLowerCase();
-    }
-
-    function getLang()
-    {
-        return (document.documentElement.lang || '').toLowerCase();
-    }
-
-    function inferDefaultCurrencyByHost(host = getHost())
-    {
-        const lang = getLang();
-
-        if (host.endsWith('.jp') || host.includes('amazon.co.jp') || host.includes('rakuten') || host.includes('yahoo.co.jp'))
-        {
-            return 'JPY';
-        }
-
-        if (host.endsWith('.cn') || host.includes('taobao') || host.includes('tmall') || host.includes('jd.com') || host.includes('1688.com'))
-        {
-            return 'CNY';
-        }
-
-        if (host.endsWith('.tw') || host.includes('shopee.tw') || host.includes('ruten'))
-        {
-            return 'TWD';
-        }
-
-        if (host.endsWith('.hk') || host.includes('shopee.hk'))
-        {
-            return 'HKD';
-        }
-
-        if (host.endsWith('.sg') || host.includes('shopee.sg'))
-        {
-            return 'SGD';
-        }
-
-        if (host.endsWith('.au') || host.includes('amazon.com.au'))
-        {
-            return 'AUD';
-        }
-
-        if (host.endsWith('.ca') || host.includes('amazon.ca'))
-        {
-            return 'CAD';
-        }
-
-        if (host.endsWith('.my') || host.includes('shopee.com.my') || lang.includes('ms'))
-        {
-            return 'MYR';
-        }
-
-        if (host.endsWith('.ph') || host.includes('shopee.ph'))
-        {
-            return 'PHP';
-        }
-
-        if (host.endsWith('.th') || host.includes('shopee.co.th'))
-        {
-            return 'THB';
-        }
-
-        if (host.endsWith('.vn') || host.includes('shopee.vn'))
-        {
-            return 'VND';
-        }
-
-        if (host.endsWith('.id') || host.includes('tokopedia') || host.includes('shopee.co.id'))
-        {
-            return 'IDR';
-        }
-
-        if (host.endsWith('.br'))
-        {
-            return 'BRL';
-        }
-
-        if (host.endsWith('.mx'))
-        {
-            return 'MXN';
-        }
-
-        if (host.endsWith('.tr'))
-        {
-            return 'TRY';
-        }
-
-        if (host.endsWith('.ae'))
-        {
-            return 'AED';
-        }
-
-        if (host.endsWith('.pl'))
-        {
-            return 'PLN';
-        }
-
-        if (host.endsWith('.cz'))
-        {
-            return 'CZK';
-        }
-
-        if (host.endsWith('.hu'))
-        {
-            return 'HUF';
-        }
-
-        if (host.endsWith('.ro'))
-        {
-            return 'RON';
-        }
-
-        if (host.endsWith('.ua'))
-        {
-            return 'UAH';
-        }
-
-        if (host.endsWith('.za'))
-        {
-            return 'ZAR';
-        }
-
-        if (host.endsWith('.no'))
-        {
-            return 'NOK';
-        }
-
-        if (host.endsWith('.dk'))
-        {
-            return 'DKK';
-        }
-
-        if (host.endsWith('.se'))
-        {
-            return 'SEK';
-        }
-
-        if (host.endsWith('.uk'))
-        {
-            return 'GBP';
-        }
-
-        if (host.endsWith('.eu') || host.endsWith('.de') || host.endsWith('.fr') || host.endsWith('.it') || host.endsWith('.es') || host.endsWith('.nl'))
-        {
-            return 'EUR';
-        }
-
-        return 'USD';
     }
 
     function detectContextCurrency(symbol)
     {
+        const lang = (document.documentElement.lang || '').toLowerCase();
+        const host = location.hostname.toLowerCase();
+
         if (symbol === '¥' || symbol === '￥')
         {
-            const host = getHost();
-            const lang = getLang();
-
             if (lang.includes('ja') || host.endsWith('.jp') || host.includes('rakuten') || host.includes('amazon.co.jp') || host.includes('yahoo.co.jp'))
             {
                 return 'JPY';
@@ -362,24 +189,32 @@
 
         if (symbol === '$')
         {
-            return inferDefaultCurrencyByHost();
-        }
-
-        if (String(symbol).toLowerCase() === 'kr')
-        {
-            const host = getHost();
-
-            if (host.endsWith('.no'))
+            if (host.endsWith('.tw') || host.includes('ruten') || host.includes('shopee.tw') || lang.includes('tw'))
             {
-                return 'NOK';
+                return 'TWD';
             }
 
-            if (host.endsWith('.dk'))
+            if (host.endsWith('.hk') || host.includes('amazon.com.hk') || lang.includes('hk'))
             {
-                return 'DKK';
+                return 'HKD';
             }
 
-            return 'SEK';
+            if (host.endsWith('.sg') || host.includes('amazon.sg') || lang.includes('sg'))
+            {
+                return 'SGD';
+            }
+
+            if (host.endsWith('.au') || host.includes('amazon.com.au'))
+            {
+                return 'AUD';
+            }
+
+            if (host.endsWith('.ca') || host.includes('amazon.ca'))
+            {
+                return 'CAD';
+            }
+
+            return 'USD';
         }
 
         return null;
@@ -387,49 +222,34 @@
 
     const currencyMap =
     {
-        '$':       detectContextCurrency('$'),
-        'US$':     'USD',
-        'HK$':     'HKD',
-        'NT$':     'TWD',
-        'S$':      'SGD',
-        'A$':      'AUD',
-        'AU$':     'AUD',
-        'C$':      'CAD',
-        'CA$':     'CAD',
-        'NZ$':     'NZD',
-        'R$':      'BRL',
-        'MX$':     'MXN',
-        'CHF':     'CHF',
-        'Fr.':     'CHF',
-        '€':       'EUR',
-        '£':       'GBP',
-        '¥':       detectContextCurrency('¥'),
-        '￥':      detectContextCurrency('¥'),
-        '₩':       'KRW',
-        '₽':       'RUB',
-        '₹':       'INR',
-        '฿':       'THB',
-        '₪':       'ILS',
-        '₱':       'PHP',
-        '₫':       'VND',
-        '₴':       'UAH',
-        '₺':       'TRY',
-        'د.إ':     'AED',
-        'RM':      'MYR',
-        'Rp':      'IDR',
-        'kr':      detectContextCurrency('kr'),
-        'KR':      detectContextCurrency('kr'),
-        'zł':      'PLN',
-        'ZŁ':      'PLN',
-        'Kč':      'CZK',
-        'KČ':      'CZK',
-        'Ft':      'HUF',
-        'FT':      'HUF',
-        'lei':     'RON',
-        'LEI':     'RON',
-        'грн':     'UAH',
-        'ГРН':     'UAH',
-        'R':       'ZAR',
+        'US$':    'USD',
+        'HK$':    'HKD',
+        'NT$':    'TWD',
+        'S$':     'SGD',
+        'A$':     'AUD',
+        'AU$':    'AUD',
+        'C$':     'CAD',
+        'CA$':    'CAD',
+        'NZ$':    'NZD',
+        'R$':     'BRL',
+        'MX$':    'MXN',
+        'Fr.':    'CHF',
+        '$':      detectContextCurrency('$'),
+        '€':      'EUR',
+        '£':      'GBP',
+        '¥':      detectContextCurrency('¥'),
+        '￥':     detectContextCurrency('¥'),
+        '₩':      'KRW',
+        '₽':      'RUB',
+        '₹':      'INR',
+        '฿':      'THB',
+        '₪':      'ILS',
+        '₱':      'PHP',
+        '₫':      'VND',
+        '₴':      'UAH',
+        '₺':      'TRY',
+        'د.إ':    'AED',
+
         '円':      'JPY',
         '日元':    'JPY',
         '元':      'CNY',
@@ -439,42 +259,166 @@
         '新台币':   'TWD',
         '港币':    'HKD',
         '韩元':    'KRW',
-        'USD':     'USD',
-        'EUR':     'EUR',
-        'GBP':     'GBP',
-        'JPY':     'JPY',
-        'CNY':     'CNY',
-        'TWD':     'TWD',
-        'HKD':     'HKD',
-        'SGD':     'SGD',
-        'AUD':     'AUD',
-        'CAD':     'CAD',
-        'NZD':     'NZD',
-        'KRW':     'KRW',
-        'RUB':     'RUB',
-        'INR':     'INR',
-        'THB':     'THB',
-        'PHP':     'PHP',
-        'MYR':     'MYR',
-        'IDR':     'IDR',
-        'VND':     'VND',
-        'BRL':     'BRL',
-        'MXN':     'MXN',
-        'TRY':     'TRY',
-        'AED':     'AED',
-        'CHF':     'CHF',
-        'SEK':     'SEK',
-        'NOK':     'NOK',
-        'DKK':     'DKK',
-        'PLN':     'PLN',
-        'CZK':     'CZK',
-        'HUF':     'HUF',
-        'RON':     'RON',
-        'UAH':     'UAH',
-        'ZAR':     'ZAR',
-        'ILS':     'ILS'
+
+        'USD':    'USD',
+        'EUR':    'EUR',
+        'GBP':    'GBP',
+        'JPY':    'JPY',
+        'CNY':    'CNY',
+        'TWD':    'TWD',
+        'HKD':    'HKD',
+        'SGD':    'SGD',
+        'AUD':    'AUD',
+        'CAD':    'CAD',
+        'NZD':    'NZD',
+        'KRW':    'KRW',
+        'RUB':    'RUB',
+        'INR':    'INR',
+        'THB':    'THB',
+        'PHP':    'PHP',
+        'MYR':    'MYR',
+        'IDR':    'IDR',
+        'VND':    'VND',
+        'BRL':    'BRL',
+        'MXN':    'MXN',
+        'TRY':    'TRY',
+        'AED':    'AED',
+        'CHF':    'CHF',
+        'SEK':    'SEK',
+        'NOK':    'NOK',
+        'DKK':    'DKK',
+        'PLN':    'PLN',
+        'CZK':    'CZK',
+        'HUF':    'HUF',
+        'RON':    'RON',
+        'UAH':    'UAH',
+        'ZAR':    'ZAR',
+        'ILS':    'ILS',
+        'RM':     'MYR',
+        'Rp':     'IDR',
+        'kr':     'SEK',
+        'zł':     'PLN',
+        'Kč':     'CZK',
+        'Ft':     'HUF',
+        'lei':    'RON',
+        'грн':    'UAH'
     };
 
+    function getCurrencyDisplay(code)
+    {
+        const map =
+        {
+            USD: '$',
+            EUR: '€',
+            GBP: '£',
+            JPY: '¥',
+            CNY: '¥',
+            TWD: 'NT$',
+            HKD: 'HK$',
+            SGD: 'S$',
+            AUD: 'A$',
+            CAD: 'CA$',
+            NZD: 'NZ$',
+            KRW: '₩',
+            RUB: '₽',
+            INR: '₹',
+            THB: '฿',
+            PHP: '₱',
+            VND: '₫',
+            AED: 'AED ',
+            CHF: 'CHF ',
+            BRL: 'R$',
+            MXN: 'MX$',
+            TRY: '₺',
+            PLN: 'zł ',
+            CZK: 'Kč ',
+            HUF: 'Ft ',
+            RON: 'lei ',
+            UAH: '₴',
+            ZAR: 'R ',
+            ILS: '₪'
+        };
+
+        return map[code] || `${code} `;
+    }
+
+    function parseIntervalToMs(input)
+    {
+        if (!input)
+        {
+            return null;
+        }
+
+        const value = input.trim().toLowerCase();
+        const match = value.match(/^(\d+(?:\.\d+)?)(m|h|d)?$/);
+
+        if (!match)
+        {
+            return null;
+        }
+
+        const number = Number(match[1]);
+        const unit   = match[2] || 'm';
+
+        if (!Number.isFinite(number) || number <= 0)
+        {
+            return null;
+        }
+
+        switch (unit)
+        {
+            case 'm':
+                return Math.round(number * 60 * 1000);
+
+            case 'h':
+                return Math.round(number * 60 * 60 * 1000);
+
+            case 'd':
+                return Math.round(number * 24 * 60 * 60 * 1000);
+
+            default:
+                return null;
+        }
+    }
+
+    function formatIntervalForDisplay(ms)
+    {
+        if (!Number.isFinite(ms) || ms <= 0)
+        {
+            return 'N/A';
+        }
+
+        const lang    = getCurrentLanguage();
+        const minutes = ms / 60000;
+
+        if (minutes % (24 * 60) === 0)
+        {
+            const days = minutes / (24 * 60);
+            return lang === 'zh-CN' ? `${days} 天` : `${days} day(s)`;
+        }
+
+        if (minutes % 60 === 0)
+        {
+            const hours = minutes / 60;
+            return lang === 'zh-CN' ? `${hours} 小时` : `${hours} hour(s)`;
+        }
+
+        return lang === 'zh-CN' ? `${minutes} 分钟` : `${minutes} minute(s)`;
+    }
+
+    function parsePriceValue(priceStr)
+    {
+        const cleanStr = priceStr.replace(/\s+/g, '');
+
+        if (/.*\d\.\d{3},\d{1,2}$/.test(cleanStr) || /^\d+,\d{1,2}$/.test(cleanStr))
+        {
+            return parseFloat(cleanStr.replace(/\./g, '').replace(',', '.'));
+        }
+
+        return parseFloat(cleanStr.replace(/,/g, ''));
+    }
+
+    // ================= 4. Regex =================
     const numPatternStr = '([0-9]{1,3}(?:[.,\\s][0-9]{3})*(?:[.,][0-9]{1,2})?|[0-9]+(?:[.,][0-9]{1,2})?)';
 
     const nonAlphaPrefixes =
@@ -483,13 +427,14 @@
     const alphaPrefixes =
         'AED|AUD|USD|EUR|GBP|JPY|CNY|TWD|HKD|SGD|CAD|NZD|KRW|RUB|INR|THB|PHP|MYR|IDR|VND|BRL|MXN|TRY|CHF|SEK|NOK|DKK|PLN|CZK|HUF|RON|UAH|ZAR|ILS|RM|Rp';
 
+    const prefixSymbolsStr = `(${nonAlphaPrefixes}|(?:(?<![a-zA-Z])(?:${alphaPrefixes})(?![a-zA-Z])))`;
+
     const nonAlphaSuffixes =
         '€|円|日元|元|块|人民币|台币|新台币|港币|韩元|zł|Kč|Ft|lei|грн|₽|₩|₫|₴|₺';
 
     const alphaSuffixes =
         'AED|AUD|USD|EUR|GBP|JPY|CNY|TWD|HKD|SGD|CAD|NZD|KRW|RUB|INR|THB|PHP|MYR|IDR|VND|BRL|MXN|TRY|CHF|SEK|NOK|DKK|PLN|CZK|HUF|RON|UAH|ZAR|ILS|kr|RM|Rp';
 
-    const prefixSymbolsStr = `(${nonAlphaPrefixes}|(?:(?<![a-zA-Z])(?:${alphaPrefixes})(?![a-zA-Z])))`;
     const suffixSymbolsStr = `(${nonAlphaSuffixes}|(?:(?<![a-zA-Z])(?:${alphaSuffixes})(?![a-zA-Z])))`;
 
     const priceRegex = new RegExp(
@@ -500,101 +445,179 @@
     const isolatedSymbolRegex = new RegExp(`^[\\s\\n]*${prefixSymbolsStr}[\\s\\n]*$`, 'i');
     const isolatedNumRegex    = new RegExp(`^[\\s\\n]*${numPatternStr}[\\s\\n]*$`, 'i');
     const isolatedSuffixRegex = new RegExp(`^[\\s\\n]*${suffixSymbolsStr}[\\s\\n]*$`, 'i');
-    const bareNumberRegex     = new RegExp(numPatternStr, 'i');
 
-    const EXCLUDED_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'INPUT', 'CODE', 'OPTION', 'SVG', 'CANVAS']);
-
-    function parsePriceValue(priceStr)
+    // ================= 5. Styles =================
+    function ensureInjectedStyles()
     {
-        const cleanStr = String(priceStr).replace(/\s+/g, '');
-
-        if (/.*\d\.\d{3},\d{1,2}$/.test(cleanStr) || /^\d+,\d{1,2}$/.test(cleanStr))
+        if (document.getElementById('zybin-price-style'))
         {
-            return parseFloat(cleanStr.replace(/\./g, '').replace(',', '.'));
+            return;
         }
 
-        return parseFloat(cleanStr.replace(/,/g, ''));
+        const style = document.createElement('style');
+        style.id = 'zybin-price-style';
+        style.textContent = `
+            .zybin-price-wrapper
+            {
+                display: inline !important;
+            }
+
+            .zybin-converted-price
+            {
+                display: inline-block !important;
+                margin-left: 4px !important;
+                font-size: 12px !important;
+                line-height: 1.2 !important;
+                font-weight: 600 !important;
+                color: ${config.textColor} !important;
+                vertical-align: middle !important;
+                text-shadow: none !important;
+            }
+
+            /* ================= Steam base ================= */
+            .zybin-converted-price.zybin-steam-price
+            {
+                display: block !important;
+                margin-left: 0 !important;
+                text-align: right !important;
+                text-shadow: none !important;
+                letter-spacing: 0 !important;
+                opacity: 0.92 !important;
+                white-space: nowrap !important;
+            }
+
+            /* 首页活动卡片 / 胶囊 */
+            .zybin-converted-price.zybin-steam-card
+            {
+                margin-top: 2px !important;
+                font-size: 10px !important;
+                line-height: 1.12 !important;
+                font-weight: 500 !important;
+                color: rgba(255, 255, 255, 0.68) !important;
+            }
+
+            /* 搜索列表 / 愿望单 / 列表型布局 */
+            .zybin-converted-price.zybin-steam-search
+            {
+                margin-top: 2px !important;
+                font-size: 11px !important;
+                line-height: 1.15 !important;
+                font-weight: 500 !important;
+                color: rgba(255, 255, 255, 0.74) !important;
+            }
+
+            /* 详情页购买框 / DLC 区 / 购买动作区 */
+            .zybin-converted-price.zybin-steam-detail
+            {
+                margin-top: 3px !important;
+                font-size: 12px !important;
+                line-height: 1.18 !important;
+                font-weight: 600 !important;
+                color: rgba(255, 255, 255, 0.82) !important;
+            }
+
+            /* 细修：首页折扣胶囊 */
+            .sale_capsule .discount_final_price .zybin-converted-price.zybin-steam-card,
+            .cluster_capsule .discount_final_price .zybin-converted-price.zybin-steam-card,
+            .special .discount_final_price .zybin-converted-price.zybin-steam-card,
+            .special_tiny_cap .discount_final_price .zybin-converted-price.zybin-steam-card,
+            .home_area_spotlight .discount_final_price .zybin-converted-price.zybin-steam-card
+            {
+                margin-top: 1px !important;
+                font-size: 10px !important;
+            }
+
+            /* 细修：搜索列表 */
+            .search_result_row .discount_final_price .zybin-converted-price.zybin-steam-search,
+            .tab_item .discount_final_price .zybin-converted-price.zybin-steam-search,
+            .wishlist_row .discount_final_price .zybin-converted-price.zybin-steam-search
+            {
+                margin-top: 2px !important;
+            }
+
+            /* 细修：详情页购买框 */
+            .game_area_purchase_game .game_purchase_price .zybin-converted-price.zybin-steam-detail,
+            .game_area_dlc_row .game_purchase_price .zybin-converted-price.zybin-steam-detail,
+            .discount_block.game_purchase_discount .discount_final_price .zybin-converted-price.zybin-steam-detail
+            {
+                margin-top: 3px !important;
+            }
+
+            #zybin-rate-attribution
+            {
+                position: fixed !important;
+                right: 10px !important;
+                bottom: 8px !important;
+                z-index: 2147483647 !important;
+                font-size: 10px !important;
+                line-height: 1 !important;
+                opacity: 0.55 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                pointer-events: auto !important;
+                text-decoration: none !important;
+                color: rgba(255, 255, 255, 0.7) !important;
+                background: transparent !important;
+            }
+
+            #zybin-rate-attribution:hover
+            {
+                opacity: 0.85 !important;
+                text-decoration: underline !important;
+            }
+        `;
+
+        document.head.appendChild(style);
     }
 
-    function formatDurationForPrompt(ms)
+    function ensureAttributionLink()
     {
-        const minutes = ms / 60000;
-
-        if (minutes % 1440 === 0)
+        if (document.getElementById('zybin-rate-attribution'))
         {
-            return `${minutes / 1440}d`;
+            return;
         }
 
-        if (minutes % 60 === 0)
-        {
-            return `${minutes / 60}h`;
-        }
+        const a = document.createElement('a');
+        a.id          = 'zybin-rate-attribution';
+        a.href        = 'https://www.exchangerate-api.com';
+        a.target      = '_blank';
+        a.rel         = 'noreferrer noopener';
+        a.textContent = `${t('attribution_text')} ExchangeRate-API`;
 
-        return `${minutes}m`;
+        const parent = document.body || document.documentElement;
+
+        if (parent)
+        {
+            parent.appendChild(a);
+        }
     }
 
-    function formatDurationForDisplay(ms)
+    // ================= 6. Site-specific rules =================
+    function getSiteText(node, selectors)
     {
-        const minutes = ms / 60000;
-
-        if (minutes % 1440 === 0)
+        for (const selector of selectors)
         {
-            return t('duration_days', { value: minutes / 1440 });
-        }
+            const el = node.querySelector(selector);
 
-        if (minutes % 60 === 0)
-        {
-            return t('duration_hours', { value: minutes / 60 });
-        }
-
-        return t('duration_minutes', { value: minutes });
-    }
-
-    function parseDurationInput(input)
-    {
-        if (typeof input !== 'string')
-        {
-            return null;
-        }
-
-        const trimmed = input.trim();
-
-        if (!trimmed)
-        {
-            return null;
-        }
-
-        const match = trimmed.match(/^(\d+(?:\.\d+)?)\s*([mhdMHD]?)$/);
-
-        if (!match)
-        {
-            return null;
-        }
-
-        const value = Number(match[1]);
-        const unit  = (match[2] || 'm').toLowerCase();
-
-        if (!Number.isFinite(value) || value <= 0)
-        {
-            return null;
-        }
-
-        if (unit === 'm')
-        {
-            return Math.round(value * 60 * 1000);
-        }
-
-        if (unit === 'h')
-        {
-            return Math.round(value * 60 * 60 * 1000);
-        }
-
-        if (unit === 'd')
-        {
-            return Math.round(value * 24 * 60 * 60 * 1000);
+            if (el && el.textContent && el.textContent.trim())
+            {
+                return el;
+            }
         }
 
         return null;
+    }
+
+    function buildPseudoMatchForForcedCurrency(text, forcedCurrency)
+    {
+        const m = text.match(/([0-9]{1,3}(?:[.,\s][0-9]{3})*(?:[.,][0-9]{1,2})?|[0-9]+(?:[.,][0-9]{1,2})?)/);
+
+        if (!m)
+        {
+            return null;
+        }
+
+        return [null, forcedCurrency, m[1], null, null];
     }
 
     function getCurrencyAndPrice(matchObj)
@@ -607,12 +630,8 @@
             return null;
         }
 
-        let baseCurrency = currencyMap[rawSymbol] || currencyMap[rawSymbol.toUpperCase()];
-
-        if (!baseCurrency && String(rawSymbol).toLowerCase() === 'kr')
-        {
-            baseCurrency = detectContextCurrency('kr');
-        }
+        const lookupKey    = rawSymbol.toUpperCase();
+        const baseCurrency = currencyMap[lookupKey] || currencyMap[rawSymbol];
 
         if (!baseCurrency)
         {
@@ -626,19 +645,60 @@
         };
     }
 
-    function createBadge(converted, baseCurrency, originalPrice)
+    function getSteamPriceLayout(targetNode)
     {
-        const badge = document.createElement('span');
-        badge.className = 'zybin-converted-price';
-        badge.setAttribute(MARK_OWNED_ATTR, 'true');
-        badge.style.cssText =
-            `color: ${config.textColor} !important; ` +
-            'font-weight: bold !important; ' +
-            'margin-left: 4px !important; ' +
-            'font-size: 14px !important; ' +
-            'display: inline-block !important;';
+        if (!targetNode || !location.hostname.includes('steampowered.com'))
+        {
+            return 'card';
+        }
 
-        badge.textContent = `(${converted.toFixed(2)} ${config.targetCurrency})`;
+        if (targetNode.closest(
+            '.game_area_purchase_game, ' +
+            '.game_purchase_action, ' +
+            '.game_area_dlc_row, ' +
+            '.discount_block.game_purchase_discount, ' +
+            '.game_area_purchase_platform'
+        ))
+        {
+            return 'detail';
+        }
+
+        if (targetNode.closest(
+            '.search_result_row, ' +
+            '.tab_item, ' +
+            '.wishlist_row, ' +
+            '.match, ' +
+            '.browse_tag_game, ' +
+            '.salepreviewwidgets_SaleItemBrowserRow_y9MSd'
+        ))
+        {
+            return 'search';
+        }
+
+        return 'card';
+    }
+
+    function createBadge(converted, baseCurrency, originalPrice, targetNode)
+    {
+        const badge   = document.createElement('span');
+        const isSteam = location.hostname.includes('steampowered.com');
+        const display = getCurrencyDisplay(config.targetCurrency);
+
+        badge.className = 'zybin-converted-price';
+
+        if (isSteam)
+        {
+            const layout = getSteamPriceLayout(targetNode);
+
+            badge.classList.add('zybin-steam-price');
+            badge.classList.add(`zybin-steam-${layout}`);
+            badge.textContent = `${t('approx_prefix')}${display}${converted.toFixed(2)}`;
+        }
+        else
+        {
+            badge.textContent = `(${converted.toFixed(2)} ${config.targetCurrency})`;
+        }
+
         badge.title = t('badge_title',
         {
             original:       originalPrice,
@@ -647,10 +707,11 @@
             targetCurrency: config.targetCurrency
         });
 
+        badge.dataset.zybin = 'true';
         return badge;
     }
 
-    function injectBadge(targetNode, matchObj, textContainer)
+    function injectBadge(targetNode, matchObj, textContainer, insertAfterTarget = false)
     {
         const parsed = getCurrencyAndPrice(matchObj);
 
@@ -659,8 +720,7 @@
             return false;
         }
 
-        const rawPrice = parsed.rawPrice;
-        const baseCurrency = parsed.baseCurrency;
+        const { rawPrice, baseCurrency } = parsed;
 
         if (!exchangeRates[baseCurrency] ||
             !exchangeRates[config.targetCurrency] ||
@@ -685,196 +745,212 @@
             return false;
         }
 
-        if (textContainer && textContainer.nodeType === Node.TEXT_NODE)
+        if (textContainer.nodeType === Node.TEXT_NODE)
         {
-            textContainer.nodeValue = ZERO_WIDTH_SPACE + textContainer.nodeValue;
+            textContainer.nodeValue = '\u200B' + textContainer.nodeValue;
         }
-        else if (textContainer && textContainer.nodeType === Node.ELEMENT_NODE)
+        else
         {
-            textContainer.textContent = ZERO_WIDTH_SPACE + textContainer.textContent;
+            textContainer.textContent = '\u200B' + textContainer.textContent;
         }
 
-        const badge = createBadge(converted, baseCurrency, priceVal);
+        const badge   = createBadge(converted, baseCurrency, priceVal, targetNode);
+        const isSteam = location.hostname.includes('steampowered.com');
 
-        if (targetNode && targetNode.parentNode)
+        if (isSteam && targetNode && targetNode.nodeType === Node.ELEMENT_NODE)
+        {
+            targetNode.appendChild(badge);
+        }
+        else if (insertAfterTarget && targetNode.parentNode)
         {
             targetNode.parentNode.insertBefore(badge, targetNode.nextSibling);
-            targetNode.setAttribute(MARK_PROCESSED_ATTR, 'true');
-            log('badge inserted', { baseCurrency, priceVal, converted, targetNode });
-            return true;
+        }
+        else if (targetNode.parentNode)
+        {
+            targetNode.parentNode.insertBefore(badge, targetNode.nextSibling);
         }
 
-        return false;
+        log('badge inserted', { baseCurrency, priceVal, converted, targetNode });
+
+        return true;
     }
 
-    function getFirstTextElement(node, selectors)
+    function processSimplePriceNode(node, forcedCurrency = null)
     {
-        if (!node || !Array.isArray(selectors))
+        if (!node || node.dataset.zybin === 'true')
         {
-            return null;
+            return;
         }
 
-        for (const selector of selectors)
-        {
-            const element = node.querySelector(selector);
+        const text = (node.textContent || '').trim();
 
-            if (element && element.textContent && element.textContent.trim())
-            {
-                return element;
-            }
+        if (!text || text.includes('\u200B'))
+        {
+            return;
         }
 
-        return null;
-    }
-
-    function buildPseudoMatchForForcedCurrency(text, forcedCurrency)
-    {
-        const numberMatch = String(text).match(bareNumberRegex);
-
-        if (!numberMatch)
-        {
-            return null;
-        }
-
-        return [null, forcedCurrency, numberMatch[1], null, null];
-    }
-
-    function matchPriceText(text, forcedCurrency = null)
-    {
-        const normalizedText = String(text || '').trim();
-
-        if (!normalizedText || normalizedText.includes(ZERO_WIDTH_SPACE))
-        {
-            return null;
-        }
-
-        priceRegex.lastIndex = 0;
-        const directMatch = priceRegex.exec(normalizedText);
-
-        if (directMatch)
-        {
-            return directMatch;
-        }
+        let match = null;
 
         if (forcedCurrency)
         {
-            return buildPseudoMatchForForcedCurrency(normalizedText, forcedCurrency);
+            match = buildPseudoMatchForForcedCurrency(text, forcedCurrency);
         }
-
-        return null;
-    }
-
-    function processPriceNode(node, options = {})
-    {
-        if (!node || node.getAttribute(MARK_PROCESSED_ATTR) === 'true')
+        else
         {
-            return;
+            priceRegex.lastIndex = 0;
+            match = priceRegex.exec(text);
         }
-
-        const textCarrier = options.textSelectors ? getFirstTextElement(node, options.textSelectors) : node;
-        const text = textCarrier ? textCarrier.textContent : node.textContent;
-        const forcedCurrency = options.forcedCurrency || null;
-        const match = matchPriceText(text, forcedCurrency);
 
         if (match)
         {
-            injectBadge(node, match, textCarrier || node);
-            return;
+            injectBadge(node, match, node, false);
         }
 
-        node.setAttribute(MARK_PROCESSED_ATTR, 'true');
+        node.dataset.zybin = 'true';
     }
 
-    const siteRules =
-    [
-        {
-            name:     'Amazon Global',
-            match:    () => getHost().includes('amazon.'),
-            selector: '.a-price',
-            process:  (node) =>
+    function buildSiteRules()
+    {
+        return [
             {
-                processPriceNode(node,
+                name: 'Amazon',
+                match: () => location.hostname.includes('amazon.'),
+                selector: '.a-price',
+                process: (node) =>
                 {
-                    textSelectors: ['.a-offscreen', '[aria-hidden="true"]']
-                });
+                    if (!node || node.dataset.zybin === 'true')
+                    {
+                        return;
+                    }
+
+                    const offscreen = getSiteText(node, ['.a-offscreen', '[aria-hidden="true"]']);
+
+                    if (!offscreen)
+                    {
+                        return;
+                    }
+
+                    const text = (offscreen.textContent || '').trim();
+
+                    if (!text || text.includes('\u200B'))
+                    {
+                        return;
+                    }
+
+                    priceRegex.lastIndex = 0;
+                    const match = priceRegex.exec(text);
+
+                    if (match)
+                    {
+                        injectBadge(node, match, offscreen, true);
+                    }
+
+                    node.dataset.zybin = 'true';
+                }
+            },
+            {
+                name: 'Steam',
+                match: () => location.hostname.includes('steampowered.com'),
+                selector: '.discount_final_price, .game_purchase_price, .sale_price, .match_price, .search_price',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'eBay',
+                match: () => location.hostname.includes('ebay.'),
+                selector: '.x-price-primary, .display-price, .u-flL.condText',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'AliExpress',
+                match: () => location.hostname.includes('aliexpress.'),
+                selector: '.snow-price_SnowPrice__mainS, .price--currentPriceText--V8_y_b5, .product-price-current',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'TaobaoTmall',
+                match: () => location.hostname.includes('taobao.com') || location.hostname.includes('tmall.com'),
+                selector: '.price, .tb-rmb-num, .tm-price, [class*="priceText"]',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node, 'CNY');
+                }
+            },
+            {
+                name: 'JD',
+                match: () => location.hostname.includes('jd.com'),
+                selector: '.price, .p-price, .summary-price',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node, 'CNY');
+                }
+            },
+            {
+                name: 'Newegg',
+                match: () => location.hostname.includes('newegg.'),
+                selector: '.price-current, .price-current-label, .price-current strong',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'BestBuy',
+                match: () => location.hostname.includes('bestbuy.'),
+                selector: '.priceView-customer-price, .pricing-price, [data-testid="customer-price"]',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'Walmart',
+                match: () => location.hostname.includes('walmart.'),
+                selector: '[itemprop="price"], .price-characteristic, [data-automation-id="product-price"]',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'Target',
+                match: () => location.hostname.includes('target.'),
+                selector: '[data-test="product-price"], [data-test="product-regular-price"], .h-text-bs',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node);
+                }
+            },
+            {
+                name: 'Rakuten',
+                match: () => location.hostname.includes('rakuten.'),
+                selector: '.price2, .price, .price-taxin',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node, 'JPY');
+                }
+            },
+            {
+                name: 'YahooShoppingJP',
+                match: () => location.hostname.includes('shopping.yahoo.co.jp'),
+                selector: '.Price__value, .elPriceValue, .price',
+                process: (node) =>
+                {
+                    processSimplePriceNode(node, 'JPY');
+                }
             }
-        },
-        {
-            name:     'Steam',
-            match:    () => getHost().includes('steampowered.com'),
-            selector: '.discount_final_price, .game_purchase_price, .salepreviewwidgets_StoreSalePriceBox_Wh0L8',
-            process:  (node) => processPriceNode(node)
-        },
-        {
-            name:     'eBay',
-            match:    () => getHost().includes('ebay.'),
-            selector: '.x-price-primary, .display-price, .notranslate',
-            process:  (node) => processPriceNode(node)
-        },
-        {
-            name:     'AliExpress',
-            match:    () => getHost().includes('aliexpress.'),
-            selector: '.snow-price_SnowPrice__mainS, .price--currentPriceText--V8_y_b5, .product-price-current',
-            process:  (node) => processPriceNode(node)
-        },
-        {
-            name:     'Shopee',
-            match:    () => getHost().includes('shopee.'),
-            selector: '[class*="price"], [class*="Price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: inferDefaultCurrencyByHost() })
-        },
-        {
-            name:     'Taobao / Tmall',
-            match:    () => getHost().includes('taobao.com') || getHost().includes('tmall.com'),
-            selector: '.price, .tb-rmb-num, .tm-price, [class*="Price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: 'CNY' })
-        },
-        {
-            name:     'JD',
-            match:    () => getHost().includes('jd.com') || getHost().includes('3.cn'),
-            selector: '.price, .p-price, [class*="price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: 'CNY' })
-        },
-        {
-            name:     'Newegg',
-            match:    () => getHost().includes('newegg.'),
-            selector: '.price-current, .price-current-label, .price-current strong, .is-bold',
-            process:  (node) => processPriceNode(node, { forcedCurrency: inferDefaultCurrencyByHost() })
-        },
-        {
-            name:     'BestBuy',
-            match:    () => getHost().includes('bestbuy.'),
-            selector: '.priceView-customer-price, .pricing-price__range, [class*="priceView"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: inferDefaultCurrencyByHost() })
-        },
-        {
-            name:     'Walmart',
-            match:    () => getHost().includes('walmart.'),
-            selector: '[itemprop="price"], .price-characteristic, [data-automation-id="product-price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: inferDefaultCurrencyByHost() })
-        },
-        {
-            name:     'Target',
-            match:    () => getHost().includes('target.'),
-            selector: '[data-test="product-price"], [class*="CurrentPrice"], [class*="Price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: inferDefaultCurrencyByHost() })
-        },
-        {
-            name:     'Rakuten',
-            match:    () => getHost().includes('rakuten.'),
-            selector: '.price2, .price, .price-taxin, [class*="price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: 'JPY' })
-        },
-        {
-            name:     'Yahoo Shopping Japan',
-            match:    () => getHost().includes('shopping.yahoo.co.jp'),
-            selector: '.Price__value, .elPriceValue, .price, [class*="Price"]',
-            process:  (node) => processPriceNode(node, { forcedCurrency: 'JPY' })
-        }
-    ];
+        ].filter((rule) => rule.match());
+    }
 
-    const currentSiteRules = siteRules.filter((rule) => rule.match());
-
+    // ================= 7. Generic fallback =================
     function getNextNonEmptyTextNode(startNode, maxSteps = 5)
     {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
@@ -887,7 +963,7 @@
         {
             steps++;
 
-            if (next.nodeValue.trim() !== '' && !next.nodeValue.includes(ZERO_WIDTH_SPACE))
+            if (next.nodeValue.trim() !== '' && !next.nodeValue.includes('\u200B'))
             {
                 return next;
             }
@@ -900,7 +976,7 @@
     {
         const text = node.nodeValue;
 
-        if (!text || text.includes(ZERO_WIDTH_SPACE))
+        if (!text || text.includes('\u200B'))
         {
             return;
         }
@@ -913,13 +989,13 @@
 
             if (nextTextNode && isolatedNumRegex.test(nextTextNode.nodeValue))
             {
-                const symbolMatch = text.match(isolatedSymbolRegex);
-                const priceMatch  = nextTextNode.nodeValue.match(isolatedNumRegex);
+                const symbol     = isolatedPrefixMatch[1];
+                const priceMatch = nextTextNode.nodeValue.match(isolatedNumRegex);
 
-                if (symbolMatch && priceMatch)
+                if (priceMatch)
                 {
-                    const pseudoMatch = [null, symbolMatch[1], priceMatch[1], null, null];
-                    injectBadge(nextTextNode, pseudoMatch, nextTextNode);
+                    const pseudoMatch = [null, symbol, priceMatch[1], null, null];
+                    injectBadge(nextTextNode, pseudoMatch, nextTextNode, false);
                     return;
                 }
             }
@@ -933,13 +1009,12 @@
 
             if (nextTextNode && isolatedSuffixRegex.test(nextTextNode.nodeValue))
             {
-                const priceMatch  = text.match(isolatedNumRegex);
                 const symbolMatch = nextTextNode.nodeValue.match(isolatedSuffixRegex);
 
-                if (priceMatch && symbolMatch)
+                if (symbolMatch)
                 {
-                    const pseudoMatch = [null, null, null, priceMatch[1], symbolMatch[1]];
-                    injectBadge(nextTextNode, pseudoMatch, nextTextNode);
+                    const pseudoMatch = [null, null, null, isolatedNumMatch[1], symbolMatch[1]];
+                    injectBadge(nextTextNode, pseudoMatch, nextTextNode, false);
                     return;
                 }
             }
@@ -961,6 +1036,7 @@
         while ((match = priceRegex.exec(text)) !== null)
         {
             const parsed = getCurrencyAndPrice(match);
+
             fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
 
             if (parsed &&
@@ -968,22 +1044,19 @@
                 exchangeRates[config.targetCurrency] &&
                 parsed.baseCurrency !== config.targetCurrency)
             {
-                const priceVal   = parsePriceValue(parsed.rawPrice);
-                const rateToUSD  = exchangeRates[parsed.baseCurrency];
-                const targetRate = exchangeRates[config.targetCurrency];
-                const converted  = (priceVal / rateToUSD) * targetRate;
+                const priceVal    = parsePriceValue(parsed.rawPrice);
+                const rateToUSD   = exchangeRates[parsed.baseCurrency];
+                const targetRate  = exchangeRates[config.targetCurrency];
+                const converted   = (priceVal / rateToUSD) * targetRate;
 
                 if (Number.isFinite(converted))
                 {
                     const wrapper = document.createElement('span');
                     wrapper.className = 'zybin-price-wrapper';
-                    wrapper.setAttribute(MARK_OWNED_ATTR, 'true');
+                    wrapper.dataset.zybin = 'true';
 
-                    wrapper.appendChild(
-                        document.createTextNode(match[0].replace(parsed.rawPrice, ZERO_WIDTH_SPACE + parsed.rawPrice))
-                    );
-
-                    wrapper.appendChild(createBadge(converted, parsed.baseCurrency, priceVal));
+                    wrapper.appendChild(document.createTextNode(match[0].replace(parsed.rawPrice, '\u200B' + parsed.rawPrice)));
+                    wrapper.appendChild(createBadge(converted, parsed.baseCurrency, priceVal, wrapper));
                     fragment.appendChild(wrapper);
                 }
                 else
@@ -1010,6 +1083,7 @@
         }
     }
 
+    // ================= 8. DOM walk =================
     function walkDOM(node)
     {
         if (!node)
@@ -1028,16 +1102,21 @@
             walkDOM(node.shadowRoot);
         }
 
+        const excludedTags = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'INPUT', 'CODE', 'OPTION', 'SVG', 'CANVAS']);
+
         if (node.nodeType === Node.ELEMENT_NODE)
         {
-            if (node.getAttribute(MARK_OWNED_ATTR) === 'true')
+            if ((node.dataset && node.dataset.zybin === 'true') ||
+                node.id === 'zybin-rate-attribution' ||
+                (node.classList &&
+                    (node.classList.contains('zybin-price-wrapper') || node.classList.contains('zybin-converted-price'))))
             {
                 return;
             }
 
             let handledByRule = false;
 
-            for (const rule of currentSiteRules)
+            for (const rule of siteRules)
             {
                 if (node.matches && node.matches(rule.selector))
                 {
@@ -1062,15 +1141,12 @@
 
             const tagName = node.tagName ? node.tagName.toUpperCase() : '';
 
-            if (!EXCLUDED_TAGS.has(tagName))
+            if (!excludedTags.has(tagName))
             {
                 Array.from(node.childNodes).forEach(walkDOM);
             }
-
-            return;
         }
-
-        if (node.nodeType === Node.TEXT_NODE)
+        else if (node.nodeType === Node.TEXT_NODE)
         {
             processTextNode(node);
         }
@@ -1088,7 +1164,10 @@
                 {
                     if (added.nodeType === Node.ELEMENT_NODE)
                     {
-                        if (added.getAttribute && added.getAttribute(MARK_OWNED_ATTR) === 'true')
+                        if ((added.dataset && added.dataset.zybin === 'true') ||
+                            added.id === 'zybin-rate-attribution' ||
+                            (added.classList &&
+                                (added.classList.contains('zybin-price-wrapper') || added.classList.contains('zybin-converted-price'))))
                         {
                             continue;
                         }
@@ -1104,131 +1183,138 @@
                 }
             }
 
-            if (!shouldProcess)
+            if (shouldProcess)
             {
-                return;
+                clearTimeout(window.zybinPriceTimeout);
+                window.zybinPriceTimeout = setTimeout(() =>
+                {
+                    walkDOM(document.body);
+                }, 250);
             }
-
-            clearTimeout(mutationTimer);
-            mutationTimer = window.setTimeout(() =>
-            {
-                walkDOM(document.body);
-            }, 250);
         });
 
         observer.observe(document.body, { childList: true, subtree: true });
     }
 
-    function registerMenuCommands()
+    // ================= 9. Menus =================
+    function registerMenus()
     {
-        GM_registerMenuCommand(t('menu_set_currency', { currency: config.targetCurrency }), () =>
-        {
-            const currency = prompt(t('prompt_currency'), config.targetCurrency);
-
-            if (currency === null)
+        GM_registerMenuCommand(
+            t('menu_set_currency', { currency: config.targetCurrency }),
+            () =>
             {
-                return;
-            }
+                const input = prompt(t('prompt_currency'), config.targetCurrency);
 
-            const normalized = currency.trim().toUpperCase();
+                if (!input)
+                {
+                    return;
+                }
 
-            if (!/^[A-Z]{3}$/.test(normalized))
-            {
-                alert(t('alert_invalid_currency'));
-                return;
-            }
+                const value = input.trim().toUpperCase();
 
-            GM_setValue('targetCurrency', normalized);
-            location.reload();
-        });
+                if (!/^[A-Z]{3}$/.test(value))
+                {
+                    alert(t('alert_invalid_currency'));
+                    return;
+                }
 
-        GM_registerMenuCommand(t('menu_set_color', { color: config.textColor }), () =>
-        {
-            const color = prompt(t('prompt_color'), config.textColor);
-
-            if (color === null)
-            {
-                return;
-            }
-
-            const normalized = color.trim();
-
-            if (!normalized)
-            {
-                return;
-            }
-
-            GM_setValue('textColor', normalized);
-            location.reload();
-        });
-
-        GM_registerMenuCommand(t('menu_set_cache', { interval: formatDurationForDisplay(config.cacheTime) }), () =>
-        {
-            const input = prompt(t('prompt_cache'), formatDurationForPrompt(config.cacheTime));
-
-            if (input === null)
-            {
-                return;
-            }
-
-            const ms = parseDurationInput(input);
-
-            if (!ms)
-            {
-                alert(t('alert_invalid_cache'));
-                return;
-            }
-
-            const cacheTimeMs = clampCacheTime(ms);
-            GM_setValue('cacheTimeMs', cacheTimeMs);
-            alert(t('alert_cache_saved', { interval: formatDurationForDisplay(cacheTimeMs) }));
-            location.reload();
-        });
-
-        GM_registerMenuCommand(t('menu_set_language', { language: getLanguageDisplayName(config.language) }), () =>
-        {
-            const currentValue = config.language === 'auto'
-                ? 'auto'
-                : (config.language === 'zh-CN' ? 'zh' : 'en');
-
-            const input = prompt(t('prompt_language'), currentValue);
-
-            if (input === null)
-            {
-                return;
-            }
-
-            const value = input.trim().toLowerCase();
-
-            if (value === 'auto')
-            {
-                GM_setValue('language', 'auto');
-                alert(t('alert_language_saved', { language: t('language_auto') }));
+                GM_setValue('targetCurrency', value);
                 location.reload();
-                return;
             }
-
-            if (value === 'zh')
-            {
-                GM_setValue('language', 'zh-CN');
-                alert(t('alert_language_saved', { language: t('language_zh') }));
-                location.reload();
-                return;
-            }
-
-            if (value === 'en')
-            {
-                GM_setValue('language', 'en');
-                alert(t('alert_language_saved', { language: t('language_en') }));
-                location.reload();
-                return;
-            }
-
-            alert(t('alert_invalid_language'));
-        });
+        );
 
         GM_registerMenuCommand(
-            t('menu_toggle_debug', { state: config.debug ? t('debug_on') : t('debug_off') }),
+            t('menu_set_color', { color: config.textColor }),
+            () =>
+            {
+                const input = prompt(t('prompt_color'), config.textColor);
+
+                if (input === null)
+                {
+                    return;
+                }
+
+                GM_setValue('textColor', input.trim());
+                location.reload();
+            }
+        );
+
+        GM_registerMenuCommand(
+            t('menu_set_cache', { interval: formatIntervalForDisplay(config.cacheTime) }),
+            () =>
+            {
+                const input = prompt(t('prompt_cache'), String(Math.round(config.cacheTime / 60000)));
+
+                if (input === null)
+                {
+                    return;
+                }
+
+                const ms = parseIntervalToMs(input);
+
+                if (!ms)
+                {
+                    alert(t('alert_invalid_cache'));
+                    return;
+                }
+
+                GM_setValue('cacheTimeMs', ms);
+                alert(t('alert_cache_saved', { interval: formatIntervalForDisplay(ms) }));
+                location.reload();
+            }
+        );
+
+        GM_registerMenuCommand(
+            t('menu_set_language', { language: getLanguageDisplayName(config.language) }),
+            () =>
+            {
+                const currentValue =
+                    config.language === 'auto'
+                        ? 'auto'
+                        : (config.language === 'zh-CN' ? 'zh' : 'en');
+
+                const input = prompt(t('prompt_language'), currentValue);
+
+                if (input === null)
+                {
+                    return;
+                }
+
+                const value = input.trim().toLowerCase();
+
+                if (value === 'auto')
+                {
+                    GM_setValue('language', 'auto');
+                    alert(t('alert_language_saved', { language: t('language_option_auto') }));
+                    location.reload();
+                    return;
+                }
+
+                if (value === 'zh')
+                {
+                    GM_setValue('language', 'zh-CN');
+                    alert(t('alert_language_saved', { language: t('language_option_zh') }));
+                    location.reload();
+                    return;
+                }
+
+                if (value === 'en')
+                {
+                    GM_setValue('language', 'en');
+                    alert(t('alert_language_saved', { language: t('language_option_en') }));
+                    location.reload();
+                    return;
+                }
+
+                alert(t('alert_invalid_language'));
+            }
+        );
+
+        GM_registerMenuCommand(
+            t('menu_toggle_debug',
+            {
+                state: config.debug ? t('debug_on') : t('debug_off')
+            }),
             () =>
             {
                 GM_setValue('debug', !config.debug);
@@ -1237,35 +1323,15 @@
         );
     }
 
-    function useCachedRatesIfAvailable(now)
+    // ================= 10. Init =================
+    function fetchRates()
     {
-        const cachedData = GM_getValue('ratesCache', null);
+        const now = Date.now();
 
-        if (!cachedData || !cachedData.rates)
-        {
-            return false;
-        }
-
-        if (now - cachedData.timestamp >= config.cacheTime)
-        {
-            return false;
-        }
-
-        if (!cachedData.rates[config.targetCurrency])
-        {
-            return false;
-        }
-
-        exchangeRates = cachedData.rates;
-        return true;
-    }
-
-    function fetchRates(now)
-    {
         GM_xmlhttpRequest(
         {
             method: 'GET',
-            url:    'https://api.exchangerate-api.com/v4/latest/USD',
+            url:    'https://open.er-api.com/v6/latest/USD',
             onload: function (response)
             {
                 if (response.status !== 200)
@@ -1286,9 +1352,9 @@
                     return;
                 }
 
-                if (!data || !data.rates)
+                if (!data || data.result !== 'success' || !data.rates)
                 {
-                    log('invalid rate data');
+                    log('invalid rate data', data);
                     return;
                 }
 
@@ -1306,19 +1372,29 @@
 
     function init()
     {
-        const now = Date.now();
+        ensureInjectedStyles();
+        ensureAttributionLink();
 
-        registerMenuCommands();
-        log('site rules active', currentSiteRules.map((item) => item.name));
+        siteRules = buildSiteRules();
+        registerMenus();
 
-        if (useCachedRatesIfAvailable(now))
+        const cachedData = GM_getValue('ratesCache', null);
+        const now        = Date.now();
+
+        log('site rules active', siteRules.map((x) => x.name));
+
+        if (cachedData &&
+            (now - cachedData.timestamp < config.cacheTime) &&
+            cachedData.rates &&
+            cachedData.rates[config.targetCurrency])
         {
+            exchangeRates = cachedData.rates;
             walkDOM(document.body);
             observeMutations();
             return;
         }
 
-        fetchRates(now);
+        fetchRates();
     }
 
     init();
