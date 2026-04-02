@@ -3,7 +3,7 @@
 // @name:zh-CN   实时价格汇率换算器
 // @name:en      Real-time Price Converter
 // @namespace    https://greasyfork.org/scripts/572072
-// @version      4.1.0
+// @version      4.1.1
 // @description  Detect prices on shopping websites and show converted values in real time.
 // @description:zh-CN 在购物网站上识别价格，并实时显示目标货币换算结果。
 // @description:en Detect prices on shopping websites and show converted values in real time.
@@ -90,8 +90,7 @@
             alert_language_saved:   '已设置界面语言为 {language}，刷新页面后生效。',
 
             badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
-            attribution_text:       '汇率来源',
-            approx_prefix:          '≈ '
+            attribution_text:       '汇率来源'
         },
 
         'en':
@@ -121,8 +120,7 @@
             alert_language_saved:   'Interface language has been set to {language}. Reload the page to apply it.',
 
             badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
-            attribution_text:       'Rates by',
-            approx_prefix:          '≈ '
+            attribution_text:       'Rates by'
         }
     };
 
@@ -222,86 +220,86 @@
 
     const currencyMap =
     {
-        'US$':    'USD',
-        'HK$':    'HKD',
-        'NT$':    'TWD',
-        'S$':     'SGD',
-        'A$':     'AUD',
-        'AU$':    'AUD',
-        'C$':     'CAD',
-        'CA$':    'CAD',
-        'NZ$':    'NZD',
-        'R$':     'BRL',
-        'MX$':    'MXN',
-        'Fr.':    'CHF',
-        '$':      detectContextCurrency('$'),
-        '€':      'EUR',
-        '£':      'GBP',
-        '¥':      detectContextCurrency('¥'),
-        '￥':     detectContextCurrency('¥'),
-        '₩':      'KRW',
-        '₽':      'RUB',
-        '₹':      'INR',
-        '฿':      'THB',
-        '₪':      'ILS',
-        '₱':      'PHP',
-        '₫':      'VND',
-        '₴':      'UAH',
-        '₺':      'TRY',
-        'د.إ':    'AED',
+        'US$':     'USD',
+        'HK$':     'HKD',
+        'NT$':     'TWD',
+        'S$':      'SGD',
+        'A$':      'AUD',
+        'AU$':     'AUD',
+        'C$':      'CAD',
+        'CA$':     'CAD',
+        'NZ$':     'NZD',
+        'R$':      'BRL',
+        'MX$':     'MXN',
+        'Fr.':     'CHF',
+        '$':       detectContextCurrency('$'),
+        '€':       'EUR',
+        '£':       'GBP',
+        '¥':       detectContextCurrency('¥'),
+        '￥':      detectContextCurrency('¥'),
+        '₩':       'KRW',
+        '₽':       'RUB',
+        '₹':       'INR',
+        '฿':       'THB',
+        '₪':       'ILS',
+        '₱':       'PHP',
+        '₫':       'VND',
+        '₴':       'UAH',
+        '₺':       'TRY',
+        'د.إ':     'AED',
 
-        '円':      'JPY',
-        '日元':    'JPY',
-        '元':      'CNY',
-        '块':      'CNY',
-        '人民币':   'CNY',
-        '台币':    'TWD',
-        '新台币':   'TWD',
-        '港币':    'HKD',
-        '韩元':    'KRW',
+        '円':       'JPY',
+        '日元':     'JPY',
+        '元':       'CNY',
+        '块':       'CNY',
+        '人民币':    'CNY',
+        '台币':     'TWD',
+        '新台币':    'TWD',
+        '港币':     'HKD',
+        '韩元':     'KRW',
 
-        'USD':    'USD',
-        'EUR':    'EUR',
-        'GBP':    'GBP',
-        'JPY':    'JPY',
-        'CNY':    'CNY',
-        'TWD':    'TWD',
-        'HKD':    'HKD',
-        'SGD':    'SGD',
-        'AUD':    'AUD',
-        'CAD':    'CAD',
-        'NZD':    'NZD',
-        'KRW':    'KRW',
-        'RUB':    'RUB',
-        'INR':    'INR',
-        'THB':    'THB',
-        'PHP':    'PHP',
-        'MYR':    'MYR',
-        'IDR':    'IDR',
-        'VND':    'VND',
-        'BRL':    'BRL',
-        'MXN':    'MXN',
-        'TRY':    'TRY',
-        'AED':    'AED',
-        'CHF':    'CHF',
-        'SEK':    'SEK',
-        'NOK':    'NOK',
-        'DKK':    'DKK',
-        'PLN':    'PLN',
-        'CZK':    'CZK',
-        'HUF':    'HUF',
-        'RON':    'RON',
-        'UAH':    'UAH',
-        'ZAR':    'ZAR',
-        'ILS':    'ILS',
-        'RM':     'MYR',
-        'Rp':     'IDR',
-        'kr':     'SEK',
-        'zł':     'PLN',
-        'Kč':     'CZK',
-        'Ft':     'HUF',
-        'lei':    'RON',
-        'грн':    'UAH'
+        'USD':     'USD',
+        'EUR':     'EUR',
+        'GBP':     'GBP',
+        'JPY':     'JPY',
+        'CNY':     'CNY',
+        'TWD':     'TWD',
+        'HKD':     'HKD',
+        'SGD':     'SGD',
+        'AUD':     'AUD',
+        'CAD':     'CAD',
+        'NZD':     'NZD',
+        'KRW':     'KRW',
+        'RUB':     'RUB',
+        'INR':     'INR',
+        'THB':     'THB',
+        'PHP':     'PHP',
+        'MYR':     'MYR',
+        'IDR':     'IDR',
+        'VND':     'VND',
+        'BRL':     'BRL',
+        'MXN':     'MXN',
+        'TRY':     'TRY',
+        'AED':     'AED',
+        'CHF':     'CHF',
+        'SEK':     'SEK',
+        'NOK':     'NOK',
+        'DKK':     'DKK',
+        'PLN':     'PLN',
+        'CZK':     'CZK',
+        'HUF':     'HUF',
+        'RON':     'RON',
+        'UAH':     'UAH',
+        'ZAR':     'ZAR',
+        'ILS':     'ILS',
+        'RM':      'MYR',
+        'Rp':      'IDR',
+        'kr':      'SEK',
+        'zł':      'PLN',
+        'Kč':      'CZK',
+        'Ft':      'HUF',
+        'lei':     'RON',
+        'грн':     'UAH'
     };
 
     function getCurrencyDisplay(code)
@@ -340,6 +338,43 @@
         };
 
         return map[code] || `${code} `;
+    }
+
+    function formatSteamCompactPrice(converted, currencyCode)
+    {
+        const symbol = getCurrencyDisplay(currencyCode);
+
+        switch (currencyCode)
+        {
+            case 'JPY':
+            case 'CNY':
+            case 'KRW':
+            case 'RUB':
+            case 'TWD':
+            case 'HKD':
+                return `${symbol}${Math.round(converted)}`;
+
+            case 'USD':
+            case 'EUR':
+            case 'GBP':
+            case 'AUD':
+            case 'CAD':
+            case 'SGD':
+                if (converted < 100)
+                {
+                    return `${symbol}${converted.toFixed(1)}`;
+                }
+
+                return `${symbol}${Math.round(converted)}`;
+
+            default:
+                if (converted < 100)
+                {
+                    return `${symbol}${converted.toFixed(1)}`;
+                }
+
+                return `${symbol}${Math.round(converted)}`;
+        }
     }
 
     function parseIntervalToMs(input)
@@ -506,14 +541,20 @@
                 color: rgba(255, 255, 255, 0.74) !important;
             }
 
-            /* 详情页购买框 / DLC 区 / 购买动作区 */
+            /* 详情页购买框 / Bundle 行：紧凑同排，禁止再起新行 */
             .zybin-converted-price.zybin-steam-detail
             {
-                margin-top: 3px !important;
-                font-size: 12px !important;
-                line-height: 1.18 !important;
+                display: inline-block !important;
+                margin-left: 4px !important;
+                margin-top: 0 !important;
+                font-size: 10px !important;
+                line-height: 1 !important;
                 font-weight: 600 !important;
-                color: rgba(255, 255, 255, 0.82) !important;
+                color: rgba(255, 255, 255, 0.76) !important;
+                vertical-align: baseline !important;
+                white-space: nowrap !important;
+                opacity: 0.95 !important;
+                text-align: right !important;
             }
 
             /* 细修：首页折扣胶囊 */
@@ -535,12 +576,13 @@
                 margin-top: 2px !important;
             }
 
-            /* 细修：详情页购买框 */
+            /* 细修：详情页购买框 / DLC / Bundle */
             .game_area_purchase_game .game_purchase_price .zybin-converted-price.zybin-steam-detail,
             .game_area_dlc_row .game_purchase_price .zybin-converted-price.zybin-steam-detail,
-            .discount_block.game_purchase_discount .discount_final_price .zybin-converted-price.zybin-steam-detail
+            .discount_block.game_purchase_discount .discount_final_price .zybin-converted-price.zybin-steam-detail,
+            .game_area_purchase_game .discount_final_price .zybin-converted-price.zybin-steam-detail
             {
-                margin-top: 3px !important;
+                margin-top: 0 !important;
             }
 
             #zybin-rate-attribution
@@ -682,7 +724,6 @@
     {
         const badge   = document.createElement('span');
         const isSteam = location.hostname.includes('steampowered.com');
-        const display = getCurrencyDisplay(config.targetCurrency);
 
         badge.className = 'zybin-converted-price';
 
@@ -692,7 +733,16 @@
 
             badge.classList.add('zybin-steam-price');
             badge.classList.add(`zybin-steam-${layout}`);
-            badge.textContent = `${t('approx_prefix')}${display}${converted.toFixed(2)}`;
+
+            if (layout === 'detail')
+            {
+                badge.textContent = formatSteamCompactPrice(converted, config.targetCurrency);
+            }
+            else
+            {
+                const display = getCurrencyDisplay(config.targetCurrency);
+                badge.textContent = `${display}${converted.toFixed(2)}`;
+            }
         }
         else
         {
@@ -759,7 +809,17 @@
 
         if (isSteam && targetNode && targetNode.nodeType === Node.ELEMENT_NODE)
         {
-            targetNode.appendChild(badge);
+            const layout = getSteamPriceLayout(targetNode);
+
+            if (layout === 'detail')
+            {
+                targetNode.appendChild(document.createTextNode(' '));
+                targetNode.appendChild(badge);
+            }
+            else
+            {
+                targetNode.appendChild(badge);
+            }
         }
         else if (insertAfterTarget && targetNode.parentNode)
         {
@@ -1044,10 +1104,10 @@
                 exchangeRates[config.targetCurrency] &&
                 parsed.baseCurrency !== config.targetCurrency)
             {
-                const priceVal    = parsePriceValue(parsed.rawPrice);
-                const rateToUSD   = exchangeRates[parsed.baseCurrency];
-                const targetRate  = exchangeRates[config.targetCurrency];
-                const converted   = (priceVal / rateToUSD) * targetRate;
+                const priceVal   = parsePriceValue(parsed.rawPrice);
+                const rateToUSD  = exchangeRates[parsed.baseCurrency];
+                const targetRate = exchangeRates[config.targetCurrency];
+                const converted  = (priceVal / rateToUSD) * targetRate;
 
                 if (Number.isFinite(converted))
                 {
@@ -1056,7 +1116,9 @@
                     wrapper.dataset.zybin = 'true';
 
                     wrapper.appendChild(document.createTextNode(match[0].replace(parsed.rawPrice, '\u200B' + parsed.rawPrice)));
-                    wrapper.appendChild(createBadge(converted, parsed.baseCurrency, priceVal, wrapper));
+
+                    const layoutTarget = node.parentNode || wrapper;
+                    wrapper.appendChild(createBadge(converted, parsed.baseCurrency, priceVal, layoutTarget));
                     fragment.appendChild(wrapper);
                 }
                 else
