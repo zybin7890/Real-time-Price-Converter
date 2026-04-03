@@ -3,7 +3,7 @@
 // @name:zh-CN   实时价格汇率换算器
 // @name:en      Real-time Price Converter
 // @namespace    https://greasyfork.org/scripts/572072
-// @version      4.1.1
+// @version      4.1.2
 // @description  Detect prices on shopping websites and show converted values in real time.
 // @description:zh-CN 在购物网站上识别价格，并实时显示目标货币换算结果。
 // @description:en Detect prices on shopping websites and show converted values in real time.
@@ -89,8 +89,7 @@
             alert_cache_saved:      '已设置更新时间间隔为 {interval}，刷新页面后生效。',
             alert_language_saved:   '已设置界面语言为 {language}，刷新页面后生效。',
 
-            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
-            attribution_text:       '汇率来源'
+            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}'
         },
 
         'en':
@@ -119,8 +118,7 @@
             alert_cache_saved:      'Refresh interval has been set to {interval}. Reload the page to apply it.',
             alert_language_saved:   'Interface language has been set to {language}. Reload the page to apply it.',
 
-            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}',
-            attribution_text:       'Rates by'
+            badge_title:            '{original} {baseCurrency} -> {converted} {targetCurrency}'
         }
     };
 
@@ -584,54 +582,9 @@
             {
                 margin-top: 0 !important;
             }
-
-            #zybin-rate-attribution
-            {
-                position: fixed !important;
-                right: 10px !important;
-                bottom: 8px !important;
-                z-index: 2147483647 !important;
-                font-size: 10px !important;
-                line-height: 1 !important;
-                opacity: 0.55 !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                pointer-events: auto !important;
-                text-decoration: none !important;
-                color: rgba(255, 255, 255, 0.7) !important;
-                background: transparent !important;
-            }
-
-            #zybin-rate-attribution:hover
-            {
-                opacity: 0.85 !important;
-                text-decoration: underline !important;
-            }
         `;
 
         document.head.appendChild(style);
-    }
-
-    function ensureAttributionLink()
-    {
-        if (document.getElementById('zybin-rate-attribution'))
-        {
-            return;
-        }
-
-        const a = document.createElement('a');
-        a.id          = 'zybin-rate-attribution';
-        a.href        = 'https://www.exchangerate-api.com';
-        a.target      = '_blank';
-        a.rel         = 'noreferrer noopener';
-        a.textContent = `${t('attribution_text')} ExchangeRate-API`;
-
-        const parent = document.body || document.documentElement;
-
-        if (parent)
-        {
-            parent.appendChild(a);
-        }
     }
 
     // ================= 6. Site-specific rules =================
@@ -1169,7 +1122,6 @@
         if (node.nodeType === Node.ELEMENT_NODE)
         {
             if ((node.dataset && node.dataset.zybin === 'true') ||
-                node.id === 'zybin-rate-attribution' ||
                 (node.classList &&
                     (node.classList.contains('zybin-price-wrapper') || node.classList.contains('zybin-converted-price'))))
             {
@@ -1227,7 +1179,6 @@
                     if (added.nodeType === Node.ELEMENT_NODE)
                     {
                         if ((added.dataset && added.dataset.zybin === 'true') ||
-                            added.id === 'zybin-rate-attribution' ||
                             (added.classList &&
                                 (added.classList.contains('zybin-price-wrapper') || added.classList.contains('zybin-converted-price'))))
                         {
@@ -1435,7 +1386,6 @@
     function init()
     {
         ensureInjectedStyles();
-        ensureAttributionLink();
 
         siteRules = buildSiteRules();
         registerMenus();
